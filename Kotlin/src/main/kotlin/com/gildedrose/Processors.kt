@@ -24,7 +24,9 @@ sealed class ItemProcessor {
 }
 
 open class DefaultProcessor : ItemProcessor() {
-    override fun processQuality(item: Item): Int = if (item.sellIn <= 0) item.quality - 2 else item.quality - 1
+    override fun processQuality(item: Item): Int {
+        return if (item.sellIn <= 0) item.quality - 2 else item.quality - 1
+    }
     override fun processSellIn(item: Item): Int = item.sellIn - 1
 
 }
@@ -39,7 +41,9 @@ object BackstageProcessor : DefaultProcessor() {
 }
 
 object AgedBrieProcessor : DefaultProcessor() {
-    override fun processQuality(item: Item): Int = if (item.sellIn <= 0) item.quality + 2 else item.quality + 1
+    override fun processQuality(item: Item): Int {
+        return if (item.sellIn <= 0) item.quality + 2 else item.quality + 1
+    }
 }
 
 object SulfurasProcessor : ItemProcessor() {
