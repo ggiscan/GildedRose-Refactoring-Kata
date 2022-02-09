@@ -6,4 +6,4 @@ I used the "golden output" as a resource in GildedRoseTest and implemented a sma
 against actual output
 - As requested in the challenge I couldn't modify the signature of some functions, so I couldn't refactor as much as I 
 would've liked (GildedRose to become immutable)
-- 
+- The new updated logic for ConjuredProcessor is not used (intentionally, since the tests are not updated)

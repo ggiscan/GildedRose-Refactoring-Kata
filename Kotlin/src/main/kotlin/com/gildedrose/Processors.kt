@@ -15,6 +15,8 @@ sealed class ItemProcessor {
                 "Aged Brie" -> AgedBrieProcessor
                 "Sulfuras, Hand of Ragnaros" -> SulfurasProcessor
                 "Backstage passes to a TAFKAL80ETC concert" -> BackstageProcessor
+                //as this will not match, it will not create the updated Conjured Processor.
+                //Used only to exemplify how the processor can be simply added
                 "Conjured" -> ConjuredProcessor
                 else -> DefaultProcessor()
             }
@@ -54,5 +56,7 @@ object SulfurasProcessor : ItemProcessor() {
 }
 
 object ConjuredProcessor : DefaultProcessor() {
-    override fun processQuality(item: Item): Int = item.quality - 2
+    override fun processQuality(item: Item): Int {
+        return if (item.sellIn <= 0) item.quality - 4 else item.quality - 2
+    }
 }
