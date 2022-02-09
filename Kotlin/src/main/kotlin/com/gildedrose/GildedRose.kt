@@ -3,6 +3,13 @@ package com.gildedrose
 class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
+        //use immutability as much as possible: we are not allowed to change signature of the function
+        //but we can still create new items instead of update in place
+        for (i in items.indices) {
+            items[i] = items[i].process()
+        }
+    }
+    fun updateQuality1() {
         for (i in items.indices) {
             if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
                 if (items[i].quality > 0) {
