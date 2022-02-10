@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
 
 internal class GildedRoseTest {
+    private val dayRegex = """^-+ day (.*?) -+$""".toRegex()
 
     @Test
     fun test30Days() {
@@ -41,8 +42,7 @@ internal class GildedRoseTest {
     }
 
     private fun grabGildedRoseForDay(lines: List<String>): Pair<GildedRose, Int> {
-        val regex = """^-.* day (.*?) -.*$""".toRegex()
-        val dayStr = regex.find(lines[0])?.groupValues?.last()?: fail("Unexpected format of golden file")
+        val dayStr = dayRegex.find(lines[0])?.groupValues?.last()?: fail("Unexpected format of golden file")
         try {
             val day = dayStr.toInt()
             val items = lines.drop(2).dropLast(1).map { line ->
@@ -68,7 +68,7 @@ internal class GildedRoseTest {
     }
 
     private fun readResource(path: String): Sequence<String> {
-        return object {}.javaClass.getResource(path).openStream().bufferedReader().lineSequence()
+        return object {}.javaClass.getResource(path)?.openStream()?.bufferedReader()?.lineSequence() ?: fail("Cannot open file")
     }
 }
 
