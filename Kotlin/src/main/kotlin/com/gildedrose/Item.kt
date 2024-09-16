@@ -5,3 +5,4 @@ open class Item(var name: String, var sellIn: Int, var quality: Int) {
         return this.name + ", " + this.sellIn + ", " + this.quality
     }
 }
+
